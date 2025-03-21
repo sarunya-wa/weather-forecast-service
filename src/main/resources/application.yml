@@ -1,0 +1,13 @@
+server:
+  port: 8080
+
+weatherapi:
+  key: 2254e58aa1614cf5817204958251903
+  ## key:
+  url: https://api.weatherapi.com
+
+cache:
+  ## manager: noopCacheManager
+  manager: simpleCacheManager
+  ttl:
+    forecastInfo: 30

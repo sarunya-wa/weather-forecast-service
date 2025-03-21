@@ -1,0 +1,19 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="cacheManager" class="org.springframework.cache.concurrent.ConcurrentMapCacheManager">
+        <property name="cacheNames">
+            <list>
+                <value>forecastCache</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="forecastCache" class="org.springframework.cache.Cache">
+        <property name="name" value="forecastCache"/>
+        <property name="ttl" value="1800"/> <!-- Time to live in seconds -->
+    </bean>
+
+</beans>

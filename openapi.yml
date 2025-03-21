@@ -1,0 +1,97 @@
+openapi: 3.0.3
+info:
+  title: Weather Forecast Service API
+  description: API for retrieving weather forecast data based on user-provided addresses.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Local development server
+paths:
+  /forecast:
+    get:
+      summary: Get weather forecast
+      description: Retrieves weather forecast data for a given address or zip code.
+      parameters:
+        - name: q
+          in: query
+          description: Address or zip code for which to retrieve the weather forecast.
+          required: true
+          schema:
+            type: string
+            example: "98665"
+      responses:
+        '200':
+          description: Successful response with weather forecast data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  locationDesc:
+                    type: string
+                    description: Description of the location (e.g., city, region, country).
+                    example: "Name: Vancouver Region: WA Country: USA"
+                  currentTemperatureInCelsius:
+                    type: number
+                    description: Current temperature in Celsius.
+                    example: 20.0
+                  currentTemperatureInFahrenheit:
+                    type: number
+                    description: Current temperature in Fahrenheit.
+                    example: 68.0
+                  currentTemperatureDescription:
+                    type: string
+                    description: Description of the current weather condition.
+                    example: "Sunny"
+                  dayInfo:
+                    type: array
+                    description: Array of forecast information for upcoming days.
+                    items:
+                      type: object
+                      properties:
+                        maxTemperatureInCelsius:
+                          type: number
+                          description: Maximum temperature in Celsius.
+                          example: 25.0
+                        minTemperatureInCelsius:
+                          type: number
+                          description: Minimum temperature in Celsius.
+                          example: 15.0
+                        maxTemperatureInFahrenheit:
+                          type: number
+                          description: Maximum temperature in Fahrenheit.
+                          example: 77.0
+                        minTemperatureInFahrenheit:
+                          type: number
+                          description: Minimum temperature in Fahrenheit.
+                          example: 59.0
+                        temperatureDescription:
+                          type: string
+                          description: Description of the weather condition for the day.
+                          example: "Partly Cloudy"
+                  cached:
+                    type: boolean
+                    description: Indicates whether the data was retrieved from the cache.
+                    example: true
+        '400':
+          description: Bad request. The query parameter `q` is missing or invalid.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message.
+                    example: "Invalid query parameter: q"
+        '500':
+          description: Internal server error. Something went wrong on the server.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message.
+                    example: "Internal server error"
