@@ -102,7 +102,7 @@ docker run -p 8080:8080 weather-forecast-service
 4. **Clone the repository:**
 
 ```
-git clone <repository-url>
+git clone git@github.com:sarunya-wa/weather-forecast-service.git
 cd weather-forecast-service
 ```
 
